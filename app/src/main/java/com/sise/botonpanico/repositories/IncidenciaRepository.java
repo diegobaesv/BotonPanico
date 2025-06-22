@@ -11,30 +11,33 @@ import com.sise.botonpanico.shared.HttpUtil;
 public class IncidenciaRepository {
 
     public void insertarIncidencia(Incidencia incidencia, Callback<Incidencia> callback) {
-        try {
-            // Hace peticion enviando el objeto incidencia como String, y devuelve la respuesta del API en string
-            String response = HttpUtil.POST(Constants.BASE_URL_API, "/incidencias", new Gson().toJson(incidencia));
-            if (response == null) {
-                callback.onFailure();
-                return;
-            }
-            // Convertir el response String en el objeto BaseResponse<Incidencia>
-            BaseResponse<Incidencia> baseResponse = new Gson().fromJson(response, TypeToken.getParameterized(BaseResponse.class, Incidencia.class).getType());
-            if(baseResponse == null){
-                callback.onFailure();
-                return;
-            }
+        new Thread(() -> {
+            try {
+                // Hace peticion enviando el objeto incidencia como String, y devuelve la respuesta del API en string
+                String response = HttpUtil.POST(Constants.BASE_URL_API, "/incidencias", new Gson().toJson(incidencia));
+                if (response == null) {
+                    callback.onFailure();
+                    return;
+                }
+                // Convertir el response String en el objeto BaseResponse<Incidencia>
+                BaseResponse<Incidencia> baseResponse = new Gson().fromJson(response, TypeToken.getParameterized(BaseResponse.class, Incidencia.class).getType());
+                if(baseResponse == null){
+                    callback.onFailure();
+                    return;
+                }
 
-            if(!baseResponse.isSuccess()){
+                if(!baseResponse.isSuccess()){
+                    callback.onFailure();
+                    return;
+                }
+                callback.onSuccess(baseResponse.getData());
+            } catch (Exception e){
+                System.out.println(e);
+                e.printStackTrace();
                 callback.onFailure();
-                return;
             }
-            callback.onSuccess(baseResponse.getData());
-        } catch (Exception e){
-            System.out.println(e);
-            e.printStackTrace();
-            callback.onFailure();
-        }
+        }).start();
+
 
     }
 

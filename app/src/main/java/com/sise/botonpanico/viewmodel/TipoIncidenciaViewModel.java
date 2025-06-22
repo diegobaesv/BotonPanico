@@ -7,11 +7,12 @@ import androidx.lifecycle.ViewModel;
 import com.sise.botonpanico.entities.TipoIncidencia;
 import com.sise.botonpanico.repositories.TipoIncidenciaRepository;
 import com.sise.botonpanico.shared.Callback;
+import com.sise.botonpanico.shared.LiveDataResponse;
 
 import java.util.List;
 
 public class TipoIncidenciaViewModel extends ViewModel {
-    private MutableLiveData<List<TipoIncidencia>> listarTipoIncidenciasLiveData;
+    private MutableLiveData<LiveDataResponse<List<TipoIncidencia>>> listarTipoIncidenciasLiveData;
     private TipoIncidenciaRepository tipoIncidenciaRepository;
 
     public TipoIncidenciaViewModel(){
@@ -19,7 +20,7 @@ public class TipoIncidenciaViewModel extends ViewModel {
         this.tipoIncidenciaRepository = new TipoIncidenciaRepository();
     }
 
-    public LiveData<List<TipoIncidencia>> getListarTipoIncidenciasLiveData(){
+    public LiveData<LiveDataResponse<List<TipoIncidencia>>> getListarTipoIncidenciasLiveData(){
         return listarTipoIncidenciasLiveData;
     }
 
@@ -27,12 +28,12 @@ public class TipoIncidenciaViewModel extends ViewModel {
         this.tipoIncidenciaRepository.listarTipoIncidencias(new Callback<List<TipoIncidencia>>() {
             @Override
             public void onSuccess(List<TipoIncidencia> result) {
-                listarTipoIncidenciasLiveData.setValue(result);
+                listarTipoIncidenciasLiveData.postValue(LiveDataResponse.success(result));
             }
 
             @Override
             public void onFailure() {
-                listarTipoIncidenciasLiveData.setValue(null);
+                listarTipoIncidenciasLiveData.postValue(LiveDataResponse.error());
             }
         });
     }

@@ -45,9 +45,9 @@ public class InicioActivity extends AppCompatActivity {
     }
 
     private void observeIncidenciaViewModel(){
-        incidenciaViewModel.getInsertarIncidenciaStatus().observe(this, aBoolean -> {
-            if(aBoolean == null || !aBoolean) {
-                Toast.makeText(this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
+        incidenciaViewModel.getInsertarIncidenciaLiveData().observe(InicioActivity.this, liveDataResponse -> {
+            if(!liveDataResponse.isSuccess() || liveDataResponse.getData() == null ) {
+                Toast.makeText(InicioActivity.this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
                 return;
             }
             Toast.makeText(getApplicationContext(),"¡Se ha enviado correctamente!", Toast.LENGTH_LONG).show();

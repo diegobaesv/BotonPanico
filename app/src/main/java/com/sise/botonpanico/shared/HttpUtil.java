@@ -22,6 +22,8 @@ public class HttpUtil {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
             con.setRequestMethod("GET");
+            con.setConnectTimeout(5000);
+            con.setReadTimeout(5000);
             con.setRequestProperty("Content-Type","application/json");
             con.setDoOutput(false);
 
@@ -54,6 +56,8 @@ public class HttpUtil {
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type","application/json");
             con.setDoOutput(true);
+            con.setConnectTimeout(5000);
+            con.setReadTimeout(5000);
 
             try (DataOutputStream out = new DataOutputStream(con.getOutputStream())) {
                 out.writeBytes(body);

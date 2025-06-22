@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class OtroIncidenteActivity extends AppCompatActivity {
     private Spinner tipoIncidenciaSpinner;
     private EditText etDescripcion;
     private LinearLayout linearLayoutBotones;
+    private ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class OtroIncidenteActivity extends AppCompatActivity {
         tipoIncidenciaSpinner = findViewById(R.id.activityotroincidente_sp_tipoincidente);
         etDescripcion = findViewById(R.id.activityotroincidente_et_descripcion);
         linearLayoutBotones = findViewById(R.id.activityotroincidente_ly_linear);
+        pbLoading = findViewById(R.id.activityotroincidente_pb_loading);
 
         incidenciaViewModel = new ViewModelProvider(this).get(IncidenciaViewModel.class);
         tipoIncidenciaViewModel = new ViewModelProvider(this).get(TipoIncidenciaViewModel.class);
@@ -63,16 +66,21 @@ public class OtroIncidenteActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        pbLoading.setVisibility(View.VISIBLE);
         tipoIncidenciaViewModel.listarTipoIncidencias();
     }
 
     private void observeTipoIncidenciaViewModel(){
-        tipoIncidenciaViewModel.getListarTipoIncidenciasLiveData().observe(this, tipoIncidencias -> {
+        tipoIncidenciaViewModel.getListarTipoIncidenciasLiveData().observe(OtroIncidenteActivity.this, liveDataResponse -> {
 
-            if(tipoIncidencias == null) {
-               Toast.makeText(this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
-               return;
+            pbLoading.setVisibility(View.GONE);
+
+            if(!liveDataResponse.isSuccess() || liveDataResponse.getData() == null ) {
+                Toast.makeText(OtroIncidenteActivity.this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
+                return;
             }
+
+            List<TipoIncidencia> tipoIncidencias = liveDataResponse.getData();
 
             List<TipoIncidencia> tipoIncidenciaNoBoton = new ArrayList<>();
             for ( TipoIncidencia _tipoIncidencia : tipoIncidencias) {
@@ -80,7 +88,7 @@ public class OtroIncidenteActivity extends AppCompatActivity {
                     tipoIncidenciaNoBoton.add(_tipoIncidencia);
                 }
             }
-            TipoIncidenciaSpinnerAdapter adapter = new TipoIncidenciaSpinnerAdapter(this,tipoIncidenciaNoBoton);
+            TipoIncidenciaSpinnerAdapter adapter = new TipoIncidenciaSpinnerAdapter(OtroIncidenteActivity.this,tipoIncidenciaNoBoton);
             tipoIncidenciaSpinner.setAdapter(adapter);
 
             for (TipoIncidencia tipoIncidencia: tipoIncidencias) {
@@ -94,18 +102,21 @@ public class OtroIncidenteActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void observeIncidenciaViewModel(){
-        incidenciaViewModel.getInsertarIncidenciaStatus().observe(this, aBoolean -> {
-            if(aBoolean == null || !aBoolean) {
+        incidenciaViewModel.getInsertarIncidenciaLiveData().observe(OtroIncidenteActivity.this, liveDataResponse -> {
+            if(!liveDataResponse.isSuccess() || liveDataResponse.getData() == null ) {
                 Toast.makeText(this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
                 return;
             }
+
             Toast.makeText(getApplicationContext(),"¡Se ha enviado correctamente!", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(OtroIncidenteActivity.this, InicioActivity.class);
             startActivity(intent);
         });
+
     }
 
     public void onClickEnviar(View view) {

@@ -14,32 +14,35 @@ import java.util.List;
 
 public class TipoIncidenciaRepository {
     public void listarTipoIncidencias(Callback<List<TipoIncidencia>> callback){
-        try {
-            String response = HttpUtil.GET(Constants.BASE_URL_API, "/tipo-incidencias");
-            if (response == null) {
+        new Thread(() -> {
+            try {
+                String response = HttpUtil.GET(Constants.BASE_URL_API, "/tipo-incidencias");
+                if (response == null) {
+                    callback.onFailure();
+                    return;
+                }
+
+                Type type = TypeToken.getParameterized(BaseResponse.class,
+                        TypeToken.getParameterized(List.class, TipoIncidencia.class).getType()).getType();
+
+                BaseResponse<List<TipoIncidencia>> baseResponse = new Gson().fromJson(response, type);
+
+                if(baseResponse == null){
+                    callback.onFailure();
+                    return;
+                }
+
+                if(!baseResponse.isSuccess()){
+                    callback.onFailure();
+                    return;
+                }
+                callback.onSuccess(baseResponse.getData());
+            } catch (Exception e){
+                System.out.println(e);
+                e.printStackTrace();
                 callback.onFailure();
-                return;
             }
+        }).start();
 
-            Type type = TypeToken.getParameterized(BaseResponse.class,
-                    TypeToken.getParameterized(List.class, TipoIncidencia.class).getType()).getType();
-
-            BaseResponse<List<TipoIncidencia>> baseResponse = new Gson().fromJson(response, type);
-
-            if(baseResponse == null){
-                callback.onFailure();
-                return;
-            }
-
-            if(!baseResponse.isSuccess()){
-                callback.onFailure();
-                return;
-            }
-            callback.onSuccess(baseResponse.getData());
-        } catch (Exception e){
-            System.out.println(e);
-            e.printStackTrace();
-            callback.onFailure();
-        }
     }
 }
