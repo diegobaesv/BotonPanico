@@ -6,7 +6,6 @@ import com.sise.botonpanico.entities.Incidencia;
 import com.sise.botonpanico.shared.BaseResponse;
 import com.sise.botonpanico.shared.Callback;
 import com.sise.botonpanico.shared.Constants;
-import com.sise.botonpanico.shared.ExceptionMessage;
 import com.sise.botonpanico.shared.HttpUtil;
 
 public class IncidenciaRepository {

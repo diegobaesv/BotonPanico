@@ -20,6 +20,7 @@ import com.sise.botonpanico.R;
 import com.sise.botonpanico.entities.EstadoIncidencia;
 import com.sise.botonpanico.entities.Incidencia;
 import com.sise.botonpanico.entities.TipoIncidencia;
+import com.sise.botonpanico.shared.Message;
 import com.sise.botonpanico.viewmodel.IncidenciaViewModel;
 
 public class InicioActivity extends AppCompatActivity {
@@ -44,12 +45,12 @@ public class InicioActivity extends AppCompatActivity {
     }
 
     private void observeIncidenciaViewModel(){
-        incidenciaViewModel.getInsertarIncidenciaStatus().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                String text = aBoolean.booleanValue() ? "¡Se ha enviado correctamente!" : "¡Ocurrió un error al enviar!";
-                Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG).show();
+        incidenciaViewModel.getInsertarIncidenciaStatus().observe(this, aBoolean -> {
+            if(aBoolean == null || !aBoolean) {
+                Toast.makeText(this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
+                return;
             }
+            Toast.makeText(getApplicationContext(),"¡Se ha enviado correctamente!", Toast.LENGTH_LONG).show();
         });
     }
 

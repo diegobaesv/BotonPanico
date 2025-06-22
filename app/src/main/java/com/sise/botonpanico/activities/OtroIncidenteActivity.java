@@ -22,6 +22,7 @@ import com.sise.botonpanico.adapters.TipoIncidenciaSpinnerAdapter;
 import com.sise.botonpanico.entities.EstadoIncidencia;
 import com.sise.botonpanico.entities.Incidencia;
 import com.sise.botonpanico.entities.TipoIncidencia;
+import com.sise.botonpanico.shared.Message;
 import com.sise.botonpanico.viewmodel.IncidenciaViewModel;
 import com.sise.botonpanico.viewmodel.TipoIncidenciaViewModel;
 
@@ -68,6 +69,10 @@ public class OtroIncidenteActivity extends AppCompatActivity {
     private void observeTipoIncidenciaViewModel(){
         tipoIncidenciaViewModel.getListarTipoIncidenciasLiveData().observe(this, tipoIncidencias -> {
 
+            if(tipoIncidencias == null) {
+               Toast.makeText(this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
+               return;
+            }
 
             List<TipoIncidencia> tipoIncidenciaNoBoton = new ArrayList<>();
             for ( TipoIncidencia _tipoIncidencia : tipoIncidencias) {
@@ -92,14 +97,14 @@ public class OtroIncidenteActivity extends AppCompatActivity {
     }
 
     private void observeIncidenciaViewModel(){
-        incidenciaViewModel.getInsertarIncidenciaStatus().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                String text = aBoolean.booleanValue() ? "¡Se ha enviado correctamente!" : "¡Ocurrió un error al enviar!";
-                Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(OtroIncidenteActivity.this, InicioActivity.class);
-                startActivity(intent);
+        incidenciaViewModel.getInsertarIncidenciaStatus().observe(this, aBoolean -> {
+            if(aBoolean == null || !aBoolean) {
+                Toast.makeText(this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
+                return;
             }
+            Toast.makeText(getApplicationContext(),"¡Se ha enviado correctamente!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(OtroIncidenteActivity.this, InicioActivity.class);
+            startActivity(intent);
         });
     }
 
