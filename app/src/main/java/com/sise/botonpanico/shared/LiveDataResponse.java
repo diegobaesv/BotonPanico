@@ -1,20 +1,20 @@
 package com.sise.botonpanico.shared;
 
-public class LiveDataResponse {
+public class LiveDataResponse<T> {
     private boolean success;
-    private Object data;
+    private T data;
 
-    public LiveDataResponse(boolean success, Object data) {
+    public LiveDataResponse(boolean success, T data) {
         this.success = success;
         this.data = data;
     }
 
-    public static LiveDataResponse success(Object data){
-        return new LiveDataResponse(true, data);
+    public static <T> LiveDataResponse<T> success(T data) {
+        return new LiveDataResponse<>(true, data);
     }
 
-    public static LiveDataResponse error(){
-        return new LiveDataResponse(false, null);
+    public static <T> LiveDataResponse<T> error() {
+        return new LiveDataResponse<>(false, null);
     }
 
     public boolean isSuccess() {
@@ -25,11 +25,11 @@ public class LiveDataResponse {
         this.success = success;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 }
