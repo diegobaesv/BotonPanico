@@ -24,5 +24,6 @@
     <string name="actmain_et_username_hint">Nombre de Usuario</string>
     <string name="actmain_et_password_hint">Contraseña</string>
     <string name="actmain_txt_registrar"><u>Registrarse</u></string>
+    <string name="actmain_sw_modologin">Ingresar como personal interno</string>
 
 </resources>

@@ -19,6 +19,20 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="100sp"
+            android:layout_marginBottom="60sp"
+            app:srcCompat="@drawable/yapebamba" />
+
+        <Switch
+            android:id="@+id/actmain_sw_modologin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_grande"
+            android:text="@string/actmain_sw_modologin" />
+
         <EditText
             android:id="@+id/activitymain_et_username"
             android:layout_width="match_parent"
@@ -56,5 +70,7 @@
 
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
