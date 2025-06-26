@@ -20,4 +20,9 @@
     <string name="actotrinc_btn_enviar">Enviar</string>
     <string name="actotrinc_et_descripcion_hint">Descripción</string>
 
+    <string name="actmain_btn_inicio">Iniciar Sesión</string>
+    <string name="actmain_et_username_hint">Nombre de Usuario</string>
+    <string name="actmain_et_password_hint">Contraseña</string>
+    <string name="actmain_txt_registrar">Registrarse</string>
+
 </resources>
