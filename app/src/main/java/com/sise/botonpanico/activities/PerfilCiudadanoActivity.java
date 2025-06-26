@@ -15,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.sise.botonpanico.MainActivity;
 import com.sise.botonpanico.R;
 import com.sise.botonpanico.adapters.TipoDocumentoSpinnerAdapter;
+import com.sise.botonpanico.dto.TipoDocumento;
+import com.sise.botonpanico.entities.Usuario;
 import com.sise.botonpanico.shared.Data;
 
 public class PerfilCiudadanoActivity extends AppCompatActivity {
@@ -56,6 +58,15 @@ public class PerfilCiudadanoActivity extends AppCompatActivity {
     }
 
     public void onClickRegistrarse(View view){
+        Usuario usuario = new Usuario();
+        usuario.setTipoDocumento(((TipoDocumento)spTipoDocumentos.getSelectedItem()).getCodigo());
+        usuario.setNumeroDocumento(etNumeroDocumento.getText().toString());
+        usuario.setApellidoPaterno(etApellidoPaterno.getText().toString());
+        usuario.setApellidoMaterno(etApellidoMaterno.getText().toString());
+        usuario.setNombres(etNombres.getText().toString());
+        usuario.setCelular(etCelular.getText().toString());
+        usuario.setCorreo(etCorreo.getText().toString());
+        usuario.setDireccion(etDireccion.getText().toString());
 
     }
 
