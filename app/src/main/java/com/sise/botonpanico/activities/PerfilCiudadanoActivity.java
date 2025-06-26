@@ -56,7 +56,7 @@ public class PerfilCiudadanoActivity extends AppCompatActivity {
     }
 
     public void onClickRegistrarse(View view){
-        
+
     }
 
 }
