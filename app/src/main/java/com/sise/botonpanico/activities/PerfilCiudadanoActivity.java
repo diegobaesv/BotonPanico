@@ -2,6 +2,8 @@ package com.sise.botonpanico.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +21,14 @@ public class PerfilCiudadanoActivity extends AppCompatActivity {
 
     private final String TAG = PerfilCiudadanoActivity.class.getSimpleName();
     private Spinner spTipoDocumentos;
+    private EditText etNumeroDocumento;
+    private EditText etApellidoPaterno;
+    private EditText etApellidoMaterno;
+    private EditText etNombres;
+    private EditText etCelular;
+    private EditText etCorreo;
+    private EditText etDireccion;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,44 +43,20 @@ public class PerfilCiudadanoActivity extends AppCompatActivity {
         });
 
         spTipoDocumentos = findViewById(R.id.activityperfilciudadano_spn_tipodocumento);
+        etNumeroDocumento = findViewById(R.id.activityperfilciudadano_et_numerodocumento);
+        etApellidoPaterno = findViewById(R.id.activityperfilciudadano_et_apellidopaterno);
+        etApellidoMaterno = findViewById(R.id.activityperfilciudadano_et_apellidomaterno);
+        etNombres = findViewById(R.id.activityperfilciudadano_et_nombres);
+        etCelular = findViewById(R.id.activityperfilciudadano_et_celular);
+        etCorreo = findViewById(R.id.activityperfilciudadano_et_correo);
+        etDireccion = findViewById(R.id.activityperfilciudadano_et_dirrecion);
 
         TipoDocumentoSpinnerAdapter tipoDocumentoSpinnerAdapter = new TipoDocumentoSpinnerAdapter(PerfilCiudadanoActivity.this, Data.getTipoDocumentos());
         spTipoDocumentos.setAdapter(tipoDocumentoSpinnerAdapter);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "Ejecutado metodo onStart()");
+    public void onClickRegistrarse(View view){
+        
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(TAG, "Ejecutado metodo onResume()");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i(TAG, "Ejecutado metodo onRestart()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(TAG, "Ejecutado metodo onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(TAG, "Ejecutado metodo onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "Ejecutado metodo onDestroy()");
-    }
 }

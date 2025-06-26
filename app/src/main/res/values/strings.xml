@@ -9,7 +9,7 @@
     <string name="actperfciud_et_celular_hint">Celular</string>
     <string name="actperfciud_et_correo_hint">Correo</string>
     <string name="actperfciud_et_direccion_hint">Dirección</string>
-    <string name="actperfciud_btn_guardar">Guardar</string>
+    <string name="actperfciud_btn_guardar">Registrarse</string>
 
     <string name="actini_btn_sos">SOS</string>
     <string name="actini_btn_aux1">Incendio</string>
