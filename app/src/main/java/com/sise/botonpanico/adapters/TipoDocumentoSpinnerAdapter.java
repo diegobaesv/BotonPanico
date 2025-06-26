@@ -5,25 +5,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.sise.botonpanico.entities.TipoIncidencia;
+import com.sise.botonpanico.dto.TipoDocumento;
 import java.util.List;
 
-public class TipoIncidenciaSpinnerAdapter extends ArrayAdapter<TipoIncidencia> {
+public class TipoDocumentoSpinnerAdapter  extends ArrayAdapter<TipoDocumento> {
 
-    private List<TipoIncidencia> tipoIncidencias;
+    private List<TipoDocumento> tipoDocumentos;
 
-    public TipoIncidenciaSpinnerAdapter(@NonNull Context context, List<TipoIncidencia> tipoIncidencias) {
-        super(context, android.R.layout.simple_spinner_item ,tipoIncidencias);
-        this.tipoIncidencias = tipoIncidencias;
+    public TipoDocumentoSpinnerAdapter(@NonNull Context context, List<TipoDocumento> tipoDocumentos) {
+        super(context, android.R.layout.simple_spinner_item ,tipoDocumentos);
+        this.tipoDocumentos = tipoDocumentos;
     }
 
     @Override
     public int getCount() {
-        return this.tipoIncidencias != null ? this.tipoIncidencias.size() : 0;
+        return this.tipoDocumentos != null ? this.tipoDocumentos.size() : 0;
     }
 
     @NonNull
@@ -34,9 +32,9 @@ public class TipoIncidenciaSpinnerAdapter extends ArrayAdapter<TipoIncidencia> {
 
         //textview dentro de spinner
         TextView textView = view.findViewById(android.R.id.text1);
-        TipoIncidencia tipoIncidencia = getItem(position);
-        if(tipoIncidencia != null){
-            textView.setText(tipoIncidencia.getDescripcion());
+        TipoDocumento tipoDocumento = getItem(position);
+        if(tipoDocumento != null){
+            textView.setText(tipoDocumento.getDescripcion());
         }
         return view;
     }
@@ -48,9 +46,9 @@ public class TipoIncidenciaSpinnerAdapter extends ArrayAdapter<TipoIncidencia> {
 
         //textview dentro de spinner
         TextView textView = view.findViewById(android.R.id.text1);
-        TipoIncidencia tipoIncidencia = getItem(position);
-        if(tipoIncidencia != null){
-            textView.setText(tipoIncidencia.getDescripcion());
+        TipoDocumento tipoDocumento = getItem(position);
+        if(tipoDocumento != null){
+            textView.setText(tipoDocumento.getDescripcion());
         }
         return view;
     }

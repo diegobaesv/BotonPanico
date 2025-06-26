@@ -2,6 +2,7 @@ package com.sise.botonpanico.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,10 +12,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.sise.botonpanico.MainActivity;
 import com.sise.botonpanico.R;
+import com.sise.botonpanico.adapters.TipoDocumentoSpinnerAdapter;
+import com.sise.botonpanico.shared.Data;
 
 public class PerfilCiudadanoActivity extends AppCompatActivity {
 
     private final String TAG = PerfilCiudadanoActivity.class.getSimpleName();
+    private Spinner spTipoDocumentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,11 @@ public class PerfilCiudadanoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        spTipoDocumentos = findViewById(R.id.activityperfilciudadano_spn_tipodocumento);
+
+        TipoDocumentoSpinnerAdapter tipoDocumentoSpinnerAdapter = new TipoDocumentoSpinnerAdapter(PerfilCiudadanoActivity.this, Data.getTipoDocumentos());
+        spTipoDocumentos.setAdapter(tipoDocumentoSpinnerAdapter);
     }
 
     @Override

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BotonPanico</string>
 
-    <string name="actperfciud_tv_titulo">Completa tu Perfil</string>
+    <string name="actperfciud_tv_titulo">Ingresa tus datos</string>
     <string name="actperfciud_et_numerodocumento_hint">Número de documento</string>
     <string name="actperfciud_et_apellidopaterno_hint">Apellido Paterno</string>
     <string name="actperfciud_et_apellidomaterno_hint">Apellido Materno</string>
