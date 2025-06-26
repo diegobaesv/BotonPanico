@@ -23,6 +23,6 @@
     <string name="actmain_btn_inicio">Iniciar Sesión</string>
     <string name="actmain_et_username_hint">Nombre de Usuario</string>
     <string name="actmain_et_password_hint">Contraseña</string>
-    <string name="actmain_txt_registrar">Registrarse</string>
+    <string name="actmain_txt_registrar"><u>Registrarse</u></string>
 
 </resources>
