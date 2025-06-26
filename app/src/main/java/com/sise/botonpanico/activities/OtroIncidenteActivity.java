@@ -96,7 +96,24 @@ public class OtroIncidenteActivity extends AppCompatActivity {
                     Button btnTipoIncidencia = new Button(OtroIncidenteActivity.this);
                     btnTipoIncidencia.setText(tipoIncidencia.getDescripcion());
                     btnTipoIncidencia.setBackgroundResource(R.drawable.btn_otro_incidente_background);
-                    //btnTipoIncidencia.setBackgroundTintMode(null);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    params.setMargins(0, 16, 0, 16);
+                    btnTipoIncidencia.setLayoutParams(params);
+
+                    btnTipoIncidencia.setOnClickListener(view -> {
+                        Incidencia incidencia = new Incidencia();
+                        incidencia.setDescripcion("Click en boton "+tipoIncidencia.getDescripcion());
+                        incidencia.setTipoIncidencia(tipoIncidencia);
+
+                        EstadoIncidencia estadoIncidencia = new EstadoIncidencia();
+                        estadoIncidencia.setIdEstadoIncidencia(1);
+                        incidencia.setEstadoIncidencia(estadoIncidencia);
+                        incidenciaViewModel.insertarIncidencia(incidencia);
+                    });
+
                     linearLayoutBotones.addView(btnTipoIncidencia);
                 }
 
