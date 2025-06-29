@@ -1,10 +1,12 @@
 package com.sise.botonpanico.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +20,14 @@ import com.sise.botonpanico.adapters.TipoDocumentoSpinnerAdapter;
 import com.sise.botonpanico.dto.TipoDocumento;
 import com.sise.botonpanico.entities.Usuario;
 import com.sise.botonpanico.shared.Data;
+import com.sise.botonpanico.shared.Message;
+import com.sise.botonpanico.viewmodel.UsuarioViewModel;
 
 public class PerfilCiudadanoActivity extends AppCompatActivity {
 
     private final String TAG = PerfilCiudadanoActivity.class.getSimpleName();
+    private final UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+
     private Spinner spTipoDocumentos;
     private EditText etNumeroDocumento;
     private EditText etApellidoPaterno;
@@ -55,6 +61,21 @@ public class PerfilCiudadanoActivity extends AppCompatActivity {
 
         TipoDocumentoSpinnerAdapter tipoDocumentoSpinnerAdapter = new TipoDocumentoSpinnerAdapter(PerfilCiudadanoActivity.this, Data.getTipoDocumentos());
         spTipoDocumentos.setAdapter(tipoDocumentoSpinnerAdapter);
+
+        observerUsuarioViewModel();
+    }
+
+    public void observerUsuarioViewModel(){
+        usuarioViewModel.getInsertarUsuarioLiveData().observe(PerfilCiudadanoActivity.this,liveDataResponse -> {
+            if(!liveDataResponse.isSuccess() || liveDataResponse.getData() == null ) {
+                Toast.makeText(this, Message.INTENTAR_MAS_TARDE,Toast.LENGTH_LONG).show();
+                return;
+            }
+            Toast.makeText(getApplicationContext(),"¡Se ha registrado correctamente!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(PerfilCiudadanoActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     public void onClickRegistrarse(View view){
@@ -67,6 +88,9 @@ public class PerfilCiudadanoActivity extends AppCompatActivity {
         usuario.setCelular(etCelular.getText().toString());
         usuario.setCorreo(etCorreo.getText().toString());
         usuario.setDireccion(etDireccion.getText().toString());
+        usuario.setRol(Data.getRolVecino());
+
+        usuarioViewModel.insertarUsuario(usuario);
 
     }
 
