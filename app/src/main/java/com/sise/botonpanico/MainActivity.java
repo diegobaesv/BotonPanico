@@ -3,9 +3,12 @@ package com.sise.botonpanico;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -15,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.sise.botonpanico.activities.InicioActivity;
+import com.sise.botonpanico.activities.InicioSerenazgoActivity;
 import com.sise.botonpanico.activities.PerfilCiudadanoActivity;
 import com.sise.botonpanico.dto.LoginRequestDto;
 import com.sise.botonpanico.shared.Message;
@@ -26,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private final UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
     private EditText etNumeroDocumento;
     private EditText etClave;
+    private Switch swModoLogin;
+    private TextView txtRegistrarse;
+    private boolean swModoLoginIsChecked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
         });
         etNumeroDocumento = findViewById(R.id.activitymain_et_username);
         etClave = findViewById(R.id.activitymain_et_password);
+        swModoLogin = findViewById(R.id.actmain_sw_modologin);
+        txtRegistrarse = findViewById(R.id.activitymain_txt_registrar);
+
+        swModoLogin.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            swModoLoginIsChecked = isChecked;
+            txtRegistrarse.setVisibility( isChecked ? View.INVISIBLE : View.VISIBLE);
+            etNumeroDocumento.setHint( isChecked ? "DNI Serenazgo" : "DNI Vecino");
+        });
+
         observeUsuarioViewModel();
     }
 
@@ -55,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             Toast.makeText(getApplicationContext(),"¡Se ha ingresado correctamente!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, InicioActivity.class);
+            Intent intent = new Intent(this, swModoLoginIsChecked ? InicioSerenazgoActivity.class : InicioActivity.class);
             startActivity(intent);
             finish();
         });
@@ -65,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
         LoginRequestDto loginRequestDto = new LoginRequestDto();
         loginRequestDto.setNumeroDocumento(etNumeroDocumento.getText().toString());
         loginRequestDto.setClave(etClave.getText().toString());
-        loginRequestDto.setRol("VECINO");
-
+        loginRequestDto.setRol(swModoLoginIsChecked ? "SERENAZGO" : "VECINO");
         usuarioViewModel.loginUsuario(loginRequestDto);
     }
 
