@@ -27,7 +27,7 @@ import com.sise.botonpanico.viewmodel.UsuarioViewModel;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = MainActivity.class.getSimpleName();
-    private final UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+    private UsuarioViewModel usuarioViewModel;
     private EditText etNumeroDocumento;
     private EditText etClave;
     private Switch swModoLogin;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        usuarioViewModel = new UsuarioViewModel(MainActivity.this);
         etNumeroDocumento = findViewById(R.id.activitymain_et_username);
         etClave = findViewById(R.id.activitymain_et_password);
         swModoLogin = findViewById(R.id.actmain_sw_modologin);

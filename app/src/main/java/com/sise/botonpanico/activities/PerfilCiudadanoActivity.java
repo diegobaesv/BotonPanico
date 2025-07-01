@@ -26,7 +26,7 @@ import com.sise.botonpanico.viewmodel.UsuarioViewModel;
 public class PerfilCiudadanoActivity extends AppCompatActivity {
 
     private final String TAG = PerfilCiudadanoActivity.class.getSimpleName();
-    private final UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+    private UsuarioViewModel usuarioViewModel;
 
     private Spinner spTipoDocumentos;
     private EditText etNumeroDocumento;
@@ -49,6 +49,7 @@ public class PerfilCiudadanoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        usuarioViewModel = new UsuarioViewModel(PerfilCiudadanoActivity.this);
 
         spTipoDocumentos = findViewById(R.id.activityperfilciudadano_spn_tipodocumento);
         etNumeroDocumento = findViewById(R.id.activityperfilciudadano_et_numerodocumento);

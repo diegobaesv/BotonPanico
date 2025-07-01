@@ -1,5 +1,6 @@
 package com.sise.botonpanico.repositories;
 
+import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sise.botonpanico.dto.LoginRequestDto;
@@ -8,8 +9,15 @@ import com.sise.botonpanico.shared.BaseResponse;
 import com.sise.botonpanico.shared.Callback;
 import com.sise.botonpanico.shared.Constants;
 import com.sise.botonpanico.shared.HttpUtil;
+import com.sise.botonpanico.shared.SharedPreferencesUtil;
 
 public class UsuarioRepository {
+
+    private Context context;
+
+    public UsuarioRepository(Context context) {
+        this.context = context;
+    }
 
     public void loginUsuario(LoginRequestDto loginRequestDto, Callback<Usuario> callback) {
         new Thread(() -> {
@@ -31,7 +39,9 @@ public class UsuarioRepository {
                     callback.onFailure();
                     return;
                 }
-                callback.onSuccess(baseResponse.getData());
+                Usuario usuario = baseResponse.getData();
+                SharedPreferencesUtil.guardar(context, Constants.SHARED_PREFERENCES_USUARIO_LOGUEADO, new Gson().toJson(usuario));
+                callback.onSuccess(usuario);
             } catch (Exception e){
                 System.out.println(e);
                 e.printStackTrace();

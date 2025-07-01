@@ -1,9 +1,10 @@
 package com.sise.botonpanico.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.sise.botonpanico.dto.LoginRequestDto;
 import com.sise.botonpanico.entities.Usuario;
 import com.sise.botonpanico.repositories.UsuarioRepository;
@@ -16,10 +17,10 @@ public class UsuarioViewModel extends ViewModel {
     private MutableLiveData<LiveDataResponse<Usuario>> loginUsuarioLiveData;
     private UsuarioRepository usuarioRepository;
 
-    public UsuarioViewModel(){
+    public UsuarioViewModel(Context context){
         insertarUsuarioLiveData = new MutableLiveData<>();
         loginUsuarioLiveData = new MutableLiveData<>();
-        usuarioRepository = new UsuarioRepository();
+        usuarioRepository = new UsuarioRepository(context);
     }
 
     public LiveData<LiveDataResponse<Boolean>> getInsertarUsuarioLiveData(){
