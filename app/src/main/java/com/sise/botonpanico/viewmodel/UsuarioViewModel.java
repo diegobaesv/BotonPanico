@@ -15,11 +15,13 @@ public class UsuarioViewModel extends ViewModel {
 
     private MutableLiveData<LiveDataResponse<Boolean>> insertarUsuarioLiveData;
     private MutableLiveData<LiveDataResponse<Usuario>> loginUsuarioLiveData;
+    private MutableLiveData<LiveDataResponse<Usuario>> validarUsuarioLiveData;
     private UsuarioRepository usuarioRepository;
 
     public UsuarioViewModel(Context context){
         insertarUsuarioLiveData = new MutableLiveData<>();
         loginUsuarioLiveData = new MutableLiveData<>();
+        validarUsuarioLiveData = new MutableLiveData<>();
         usuarioRepository = new UsuarioRepository(context);
     }
 
@@ -29,6 +31,24 @@ public class UsuarioViewModel extends ViewModel {
 
     public LiveData<LiveDataResponse<Usuario>> getLoginUsuarioLiveData(){
         return loginUsuarioLiveData;
+    }
+
+    public LiveData<LiveDataResponse<Usuario>> getValidarUsuarioLiveData(){
+        return validarUsuarioLiveData;
+    }
+
+    public void validarUsuarioLogueado(){
+        usuarioRepository.validarUsuarioLogueado(new Callback<Usuario>() {
+            @Override
+            public void onSuccess(Usuario result) {
+                validarUsuarioLiveData.setValue(LiveDataResponse.success(result));
+            }
+
+            @Override
+            public void onFailure() {
+                validarUsuarioLiveData.setValue(LiveDataResponse.error());
+            }
+        });
     }
 
     public void loginUsuario(LoginRequestDto loginRequestDto) {

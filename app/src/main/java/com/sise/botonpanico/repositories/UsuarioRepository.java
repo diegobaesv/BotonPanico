@@ -77,7 +77,21 @@ public class UsuarioRepository {
                 callback.onFailure();
             }
         }).start();
+    }
 
-
+    public void validarUsuarioLogueado(Callback<Usuario> callback) {
+        try {
+            String json = SharedPreferencesUtil.obtener(context, Constants.SHARED_PREFERENCES_USUARIO_LOGUEADO);
+            if(json == null) {
+                callback.onFailure();
+                return;
+            }
+            Usuario usuario = new Gson().fromJson(json,Usuario.class);
+            callback.onSuccess(usuario);
+        } catch (Exception e){
+            System.out.println(e);
+            e.printStackTrace();
+            callback.onFailure();
+        }
     }
 }

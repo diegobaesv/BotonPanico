@@ -9,6 +9,7 @@ import java.util.List;
 public class Data {
 
     public static Integer ID_ROL_VECINO = 1;
+    public static Integer ID_ROL_SERENAZGO = 2;
 
     public static List<TipoDocumento> getTipoDocumentos(){
         List<TipoDocumento> tipoDocumentos = new ArrayList<>();
