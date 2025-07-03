@@ -2,6 +2,8 @@ package com.sise.botonpanico.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +13,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -23,6 +27,7 @@ import com.sise.botonpanico.adapters.TipoIncidenciaSpinnerAdapter;
 import com.sise.botonpanico.entities.EstadoIncidencia;
 import com.sise.botonpanico.entities.Incidencia;
 import com.sise.botonpanico.entities.TipoIncidencia;
+import com.sise.botonpanico.shared.MenuUtil;
 import com.sise.botonpanico.shared.Message;
 import com.sise.botonpanico.viewmodel.IncidenciaViewModel;
 import com.sise.botonpanico.viewmodel.TipoIncidenciaViewModel;
@@ -45,6 +50,10 @@ public class OtroIncidenteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_otro_incidente);
+
+        Toolbar toolbar = findViewById(R.id.activityotroincidente_toolbar);
+        setSupportActionBar(toolbar);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -68,6 +77,17 @@ public class OtroIncidenteActivity extends AppCompatActivity {
         super.onStart();
         pbLoading.setVisibility(View.VISIBLE);
         tipoIncidenciaViewModel.listarTipoIncidencias();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_vecino,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return MenuUtil.onClickMenuVecinoItem(OtroIncidenteActivity.this, item) || super.onOptionsItemSelected(item);
     }
 
     private void observeTipoIncidenciaViewModel(){

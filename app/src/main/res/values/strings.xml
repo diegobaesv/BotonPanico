@@ -26,4 +26,9 @@
     <string name="actmain_txt_registrar"><u>Registrarse</u></string>
     <string name="actmain_sw_modologin">Ingresar como personal interno</string>
 
+    <string name="menuvecino_inicio">Inicio</string>
+    <string name="menuvecino_otrosincidentes">Otros Incidentes</string>
+    <string name="menuvecino_misincidencias">Mis Incidencias</string>
+    <string name="menuvecino_cerrarsesion">Cerrar Sesión</string>
+
 </resources>

@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".activities.OtroIncidenteActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activityotroincidente_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:minHeight="?attr/actionBarSize"
+        app:title="@string/menuvecino_otrosincidentes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <ProgressBar
         android:id="@+id/activityotroincidente_pb_loading"
         android:layout_marginTop="@dimen/margin_enorme"
@@ -29,7 +41,7 @@
         android:layout_marginEnd="@dimen/margin_grande"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activityotroincidente_toolbar"
         >
 
         <!--Button

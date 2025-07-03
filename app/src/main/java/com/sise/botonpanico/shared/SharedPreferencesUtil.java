@@ -17,4 +17,14 @@ public class SharedPreferencesUtil {
         return prefs.getString(key, null);
     }
 
+    public static void eliminar(Context context, String key) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        prefs.edit().remove(key).apply();
+    }
+
+    public static void eliminarTodo(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        prefs.edit().clear().apply();
+    }
+
 }

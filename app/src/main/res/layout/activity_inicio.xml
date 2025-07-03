@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".activities.InicioActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/actini_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:minHeight="?attr/actionBarSize"
+        app:title="@string/menuvecino_inicio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <Button
         android:id="@+id/actini_btn_sos"
         android:layout_width="200dp"
@@ -22,7 +34,7 @@
         android:background="@drawable/btn_principal_sos"
         />
 
-    <Button
+    <!--Button
         android:id="@+id/actini_btn_aux1"
         android:layout_width="0dp"
         android:layout_height="80dp"
@@ -36,9 +48,9 @@
         app:layout_constraintEnd_toStartOf="@+id/actini_btn_aux2"
         app:layout_constraintTop_toBottomOf="@+id/actini_btn_sos"
         android:background="@drawable/btn_secundario_sos"
-        />
+        /-->
 
-    <Button
+    <!--Button
         android:id="@+id/actini_btn_aux2"
         android:layout_width="0dp"
         android:layout_height="80dp"
@@ -52,7 +64,7 @@
         app:layout_constraintStart_toEndOf="@+id/actini_btn_aux1"
         app:layout_constraintTop_toBottomOf="@+id/actini_btn_sos"
         android:background="@drawable/btn_secundario_sos"
-        />
+        /-->
 
     <Button
         android:id="@+id/actini_btn_otro"
@@ -64,9 +76,13 @@
         android:text="@string/actini_btn_otro"
         android:textSize="@dimen/texto_normal"
         android:onClick="onClickOtraIncidencia"
+        android:background="@drawable/btn_secundario_sos"
+        app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

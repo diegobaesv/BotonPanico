@@ -5,11 +5,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -20,6 +24,7 @@ import com.sise.botonpanico.R;
 import com.sise.botonpanico.entities.EstadoIncidencia;
 import com.sise.botonpanico.entities.Incidencia;
 import com.sise.botonpanico.entities.TipoIncidencia;
+import com.sise.botonpanico.shared.MenuUtil;
 import com.sise.botonpanico.shared.Message;
 import com.sise.botonpanico.viewmodel.IncidenciaViewModel;
 
@@ -33,6 +38,9 @@ public class InicioActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_inicio);
 
+        Toolbar toolbar = findViewById(R.id.actini_toolbar);
+        setSupportActionBar(toolbar);
+
         incidenciaViewModel = new ViewModelProvider(this).get(IncidenciaViewModel.class);
 
         observeIncidenciaViewModel();
@@ -42,6 +50,17 @@ public class InicioActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_vecino,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return MenuUtil.onClickMenuVecinoItem(InicioActivity.this, item) || super.onOptionsItemSelected(item);
     }
 
     private void observeIncidenciaViewModel(){
