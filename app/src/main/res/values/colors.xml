@@ -13,6 +13,11 @@
     <color name="yellow_variation_1">#f5ba56</color>
     <color name="yellow_variation_2">#ed9e18</color>
 
+    <color name="palette_green">#135534</color>
+    <color name="palette_yellow">#f6b615</color>
+    <color name="palette_orange">#c1541f</color>
+    <color name="palette_blue">#04333c</color>
+
 
 
 </resources>

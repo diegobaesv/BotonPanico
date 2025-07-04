@@ -28,7 +28,13 @@
 
     <string name="menuvecino_inicio">Inicio</string>
     <string name="menuvecino_otrosincidentes">Otros Incidentes</string>
-    <string name="menuvecino_misincidencias">Mis Incidencias</string>
+    <string name="menuvecino_misincidencias">Mis Incidencias Reportadas</string>
     <string name="menuvecino_cerrarsesion">Cerrar Sesión</string>
+
+
+    <string name="menuserenazgo_inicio">Inicio</string>
+    <string name="menuserenazgo_otrosincidentes">Otros Incidentes</string>
+    <string name="menuserenazgo_misincidencias">Mis Incidencias Atendidas</string>
+    <string name="menuserenazgo_cerrarsesion">Cerrar Sesión</string>
 
 </resources>

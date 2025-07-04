@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/background_card_serenazgo"
+    android:layout_marginBottom="@dimen/margin_grande"    >
+
+    <TextView
+        android:id="@+id/cardserealert_tiporeporte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="@dimen/margin_grande"
+        android:textSize="@dimen/texto_titulo"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Tipo Rerpote" />
+
+    <TextView
+        android:id="@+id/cardserealert_dia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="@dimen/margin_grande"
+        android:textSize="@dimen/texto_titulo"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Dia" />
+
+    <TextView
+        android:id="@+id/cardserealert_hora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="@dimen/margin_grande"
+        android:textSize="@dimen/texto_titulo"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Hora" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cardserealert_atender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_grande"
+        android:layout_marginEnd="@dimen/margin_grande"
+        android:layout_marginBottom="@dimen/margin_grande"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/background_button_primary"
+        android:text="Atender" />
+
+</LinearLayout>

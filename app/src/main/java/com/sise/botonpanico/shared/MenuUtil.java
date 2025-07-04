@@ -27,4 +27,19 @@ public class MenuUtil {
         }
         return true;
     }
+
+    public static boolean onClickMenuSerenazgoItem(Activity activity, MenuItem item) {
+        int idItem = item.getItemId();
+        if(idItem == R.id.menuserenazgo_inicio) {
+            Toast.makeText(activity, "menu inicioooo!",Toast.LENGTH_SHORT).show();
+        } else if (idItem == R.id.menuserenazgo_misincidencias) {
+            Toast.makeText(activity, "mis incidencias!",Toast.LENGTH_SHORT).show();
+        } else if (idItem == R.id.menuserenazgo_cerrarsesion) {
+            SharedPreferencesUtil.eliminar(activity, Constants.SHARED_PREFERENCES_USUARIO_LOGUEADO);
+            Intent intent = new Intent(activity, MainActivity.class);
+            activity.startActivity(intent);
+            activity.finish();
+        }
+        return true;
+    }
 }

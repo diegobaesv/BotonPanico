@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuserenazgo_inicio"
+        android:title="@string/menuserenazgo_inicio"
+        android:icon="@drawable/ic_baseline_home_24"
+        />
+    <item
+        android:id="@+id/menuserenazgo_misincidencias"
+        android:title="@string/menuserenazgo_misincidencias"
+        android:icon="@drawable/ic_baseline_checklist_24"
+        />
+    <item
+        android:id="@+id/menuserenazgo_cerrarsesion"
+        android:title="@string/menuserenazgo_cerrarsesion"
+        android:icon="@drawable/ic_baseline_logout_24"
+        />
+</menu>
